@@ -56,6 +56,12 @@ def urls_ns(namespace=app_label, login_url=None, tpl_path=None):
         return views.password_reset_confirm(*args, **kwargs)
 
     from django.contrib.auth import views
+    
+    try:
+        from_email = settings.CS_KARGO_EMAIL.get('username')
+    except:
+        from_email = None
+        
     return ([
         url(r'^$', views.password_reset, name='reset-password',
             kwargs={
@@ -63,6 +69,8 @@ def urls_ns(namespace=app_label, login_url=None, tpl_path=None):
                 'password_reset_form': password_reset_form,
                 'template_name': tpl('reset_password.html'),
                 'email_template_name': tpl('email.html'),
+                'html_email_template_name': tpl('email.html'),
+                'from_email': from_email,
                 'subject_template_name': tpl('subject.txt'),
                 'current_app': namespace,
                 'extra_context': extra_context
