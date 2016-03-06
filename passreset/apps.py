@@ -5,4 +5,4 @@ from django import apps
 
 class AppConfig(apps.AppConfig):
     name = 'passreset'
-    verbose_name = 'Passowrd Reset'
+    verbose_name = 'Password Reset'
